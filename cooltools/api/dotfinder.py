@@ -1031,7 +1031,11 @@ def extract_scored_pixels(scored_df, thresholds, ledges, obs_raw_name=observed_c
             scored_df[obs_raw_name].to_numpy() >= threshold_of_pixels.to_numpy()
         )
     # return pixels from 'scored_df' that satisfy FDR thresholds for all kernels:
-    return scored_df[np.all(compliant_pixel_masks, axis=0)]
+    # ***change：also return whole df with 0-1 mask***
+    boolean_mask = np.all(compliant_pixel_masks, axis=0).astype(int)
+    scored_df['pass_threshold'] = boolean_mask
+    
+    return scored_df
 
 
 def clustering_step(
