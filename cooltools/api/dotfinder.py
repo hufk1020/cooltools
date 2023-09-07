@@ -1661,6 +1661,7 @@ def dots(
         output_cols += [
             observed_count_name,
         ]
+        output_cols += ['pass_threshold']
         output_cols += [f"la_exp.{k}.value" for k in kernels]
         output_cols += [f"la_exp.{k}.qval" for k in kernels]
         return filtered_pixels_annotated[output_cols]
